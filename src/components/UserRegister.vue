@@ -139,7 +139,7 @@ export default {
               }
             })
             .catch(error=>{
-              console.log("Error en la consulta")
+              this.toast("Error","Error en la consulta al servidor")
             })
           
 
@@ -259,9 +259,6 @@ export default {
   .alertContent{
     color:black;
   }
-</style>
-
-<style lang="scss">
 
   .buttons{
     position: relative;
@@ -273,6 +270,7 @@ export default {
     width: inherit;
   }
 </style>
+
 
 
 

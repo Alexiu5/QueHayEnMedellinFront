@@ -2,7 +2,9 @@
   <vs-row vs-w="12">
 
     <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="4" vs-sm="6" vs-xs="12" >
-      <div class="left"></div>
+        <img src="../assets/logo.png" alt="" width="70%">
+      <div class="left">
+      </div>
     </vs-col>
 
     <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="8" vs-sm="6" vs-xs="12">
@@ -97,6 +99,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import UserRegister from '@/components/UserRegister'
     import SideBar from '@/components/SideBar'
 
@@ -122,7 +125,15 @@
       methods : {
         login: function (user){
               if(this.formValid()){
-                  console.log("holy shit")
+                axios.post('http://localhost:8080/user.login', user)
+                  .then((response) =>{
+                    if(response.data.exist == 1 ){
+                        this.$router.push('/admin')
+                    }else{
+                      this.alert('Iniciar sesion', 'Verifica usuario y/o contraseña')
+                    }
+                  })
+                  .catch((error) => this.toast('oops', 'Error en la aplicacion, contacte con soporte'))
               }else{
                   this.toast('oops', 'Datos incorrectos')
               }
@@ -132,32 +143,36 @@
                     && this.validos.password 
         },
         createAccount: function(){
-            this.$router.push('/register')
+            this.$router.push('/register')  
           },
+
+        clearFields : function(){
+            this.loginData.username = ''
+            this.loginData.password = ''
+        },
+
         toast: function(title, message){
-            let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
+            // let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
             let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
 
 
             this.$vs.notify({
-              title:hTitle,
+              title:title,
               text: pMessage,
               color:'primary'})
           },
 
         alert : function(title, message){
-            this.$vs.confirm({
+            let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+            this.$vs.alert({
                 title:title,
-                text: message,
+                text: pMessage,
                 textConfirm:'Aceptar',
                 textCancel:'',
-                color: 'success',
+                color: 'primary',
                 confirm:()=>{
-                    this.cancel()
+                  this.clearFields()  
                 },
-                cancel:()=>{
-                  this.cancel()
-                }
             })
           } 
         },
@@ -178,6 +193,9 @@
 
 
 <style lang="scss">
+    h3{
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    }
   .secitonlef-login {
     background: white;
     width: 100%;

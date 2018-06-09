@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import vueResource from 'vue-resource'
 import SinglePage from '@/components/SinglePage'
 import UserRegister from '@/components/UserRegister'
-import PublicarEvent from '@/components/PublicarEvent'
 import Admin from '@/views/admin/Admin'
 
 
@@ -23,11 +22,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: UserRegister
-    },
-    {
-      path: '/eventos',
-      name: 'Eventos',
-      component: PublicarEvent
     },
     {
       path: '/admin/',

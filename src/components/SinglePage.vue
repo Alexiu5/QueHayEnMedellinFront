@@ -3,14 +3,7 @@
         <vs-tabs class="nav-home" vs-color="rgb(233, 98, 89)" >
           <transition name="home-trans" enter-active-class="animated fadeIn" leave-active-class="animated fadeOutLeft">
             <vs-tab vs-label="Inicio">
-                  <div class="con-tab-Home">
-                      <Banner/>
-                      <Actualy/>
-                      <div class="separador-linea">
-                        <img src="../assets/lineas.png" alt="" width="30%">
-                      </div>
-                    <Eventos/>
-                  </div>
+                  <Home/>
             </vs-tab>
           </transition>
 
@@ -21,27 +14,24 @@
               </div>
             </vs-tab>
           </transition>
+
         </vs-tabs>
       <Footer/>
   </section>
 </template>
 
 <script>
-  import Banner from '@/components/Banner'
-  import Actualy from '@/components/Actualy'
-  import Eventos from '@/components/Eventos'
+  import Home from '@/components/Home'  
   import Footer from '@/components/Footer'
   import Login from '@/components/Login'
-  import PublicarEvento from '@/components/PublicarEvent'
+  import Admin from '@/views/admin/Admin'
     export default {
         name: "single-page",
         components:  {
-          Banner,
-          Actualy,
-          Eventos,
+          Home,
           Footer,
           Login,
-          PublicarEvento
+          Admin
         }
     }
 </script>

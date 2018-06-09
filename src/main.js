@@ -36,6 +36,7 @@ Vue.use(Vuesax, {
   }
 })
 
+Vue.config.silent = true
 
 new Vue({
   el: '#app',
