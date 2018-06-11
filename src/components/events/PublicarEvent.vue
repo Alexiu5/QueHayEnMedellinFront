@@ -441,43 +441,6 @@
       }
     },
     methods: {
-      onComplete: () => {
-        
-        console.log(this.eventos)
-        // axios({
-        //   method: 'post',
-        //   url: 'http://localhost:8080/event.create',
-        //   data: JSON.stringify(datasend)
-        // })
-        //   .then(response => {
-        //     console.log(response)
-        //   })
-        //   .catch(e => {
-        //     console.log(e)
-        //   })
-      },
-      validateFirstStep() {
-        return new Promise((resolve, reject) => {
-          if (this.validos.name) {
-            resolve(true)
-          } else {
-            resolve(false)
-          }
-        })
-      },
-      createTypes (data) {
-        data.forEach(val => {
-          this.typesEvent.push({ text: val.name, value: val.id })
-        })
-      },
-      validar() {
-        if (this.eventos.country != 0) this.validos.country = true
-        else  this.validos.country = false
-
-        if (this.eventos.depart != 0) this.validos.depart = true
-        else  this.validos.depart = false
-
-      },
       toast: function(title, message){
             // let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
             let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
@@ -496,7 +459,62 @@
                 textCancel:'',
                 color: 'primary'
             })
-          } 
+      },
+      onComplete: function (){
+        let datasend = {
+          "title": this.eventos.title,
+          "description": this.eventos.description,
+          "longitude": this.eventos.longitude,
+          "latitude": this.eventos.latitude,
+          "date": this.eventos.date,
+          "address": this.eventos.address,
+          "active": this.eventos.active,
+          "cost": this.eventos.cost,
+          "userId" : this.eventos.userId,
+          "idEventType": this.eventos.idEventType,
+          "publishedActive": this.eventos.publishedActive,
+          "publishedDate": this.eventos.publishedDate
+        }
+
+        console.log(datasend)
+        
+        axios({
+          method: 'post',
+          url: 'http://localhost:8080/event.create',
+          data : datasend
+        })
+          .then(response => {
+            if(response.status == 201 || response.data.status == 1){
+              this.alert("Correcto", "Evento correctamente registrado")
+            } 
+          })
+          .catch(e => {
+            this.alert("Error", "Ha ocurrido un error en la consulta")
+          })
+      },
+      validateFirstStep() {
+        return new Promise((resolve, reject) => {
+          if (this.validos.name) {
+            resolve(true)
+          } else {
+            this.toast("Error", "Datos Faltantes para poder continuar")
+            resolve(false)
+          }
+        })
+      },
+      createTypes (data) {
+        data.forEach(val => {
+          this.typesEvent.push({ text: val.name, value: val.id })
+        })
+      },
+      validar() {
+        if (this.eventos.country != 0) this.validos.country = true
+        else  this.validos.country = false
+
+        if (this.eventos.depart != 0) this.validos.depart = true
+        else  this.validos.depart = false
+
+      }
     },
     created() {
       for (var i = 0; i < Countris.length; i++) {

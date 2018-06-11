@@ -3,7 +3,7 @@
             <vs-row clas="row-config-table" >
                 <div id="col-misdatos">
                     <div class="item" id="title">
-                        <h3>Mis datos</h3>  
+                        <h3>información</h3>  
                     </div>
                     
                     <vs-input 
@@ -75,7 +75,7 @@
                       class="vs-w-12 left" id="profile" label="Rol - Perfil" v-model="user.idRole" :options="profiles"/> -->
                     <div class="buttons">
                       <vs-button vs-type="dark-border" id="cancel" @click="cancel">Cancelar</vs-button>  
-                      <vs-button type="submit" vs-type="primary-filled" class="btn-logn" id="send">Enviar</vs-button>  
+                      <vs-button type="submit" vs-type="primary-filled" class="btn-logn" id="send">Editar</vs-button>  
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
         padding:2rem;
         width: 100vw;
         min-height: 100vh;  
-        background-color: white;
+        background-color: #2a333c;
         // position: relative;
         // float: right;
 
@@ -107,6 +107,9 @@
         width: 50%;
         position: relative;
         margin: 0px auto;
+        padding: 3%;
+        border-radius: 7px;
+        background-color: #fcfcfc;
 
         #title{
             margin:1rem;
@@ -117,6 +120,8 @@
                 font-size: 2em;
                 font-weight: 100;
                 color:#000000;
+                text-transform: capitalize;
+                margin-bottom: 10px;
             }
         }
         .email{
@@ -125,6 +130,7 @@
         }
 
         .buttons{
+            margin-top: 10px;
             grid-column-start: 2;
             button{
                 float: right;
@@ -183,7 +189,26 @@
                     
                 })
                 .catch((err)=>console.log('Ocurrió un erro en la consulta de usuario' + err))
-            }
+            },
+        toast: function(title, message){
+            // let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
+            let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+            this.$vs.notify({
+              title:title,
+              text: pMessage,
+              color:'primary'})
+          },
+
+        alert : function(title, message){
+            let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+            this.$vs.alert({
+                title:title,
+                text: pMessage,
+                textConfirm:'Aceptar',
+                textCancel:'',
+                color: 'primary'
+            })
+          } 
         },
         created(){
             this.searchUser()
