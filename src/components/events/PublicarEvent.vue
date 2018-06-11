@@ -351,10 +351,10 @@
 
           </div>
 
-        <pre>
+        <!-- <pre>
           {{ eventos }}
            {{ validos }}
-        </pre>
+        </pre> -->
       </div>
     </vs-col>
   </vs-row>
