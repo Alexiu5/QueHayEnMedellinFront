@@ -15,8 +15,6 @@ import VeeValidate from 'vee-validate';
 import 'vuesax/dist/vuesax.css'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
-
-Vue.config.productionTip = false;
 locale.use(lang);
 Vue.use(VueFormWizard);
 Vue.use(DatePicker);

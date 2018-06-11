@@ -2,7 +2,7 @@
   <vs-row vs-w="12">
 
     <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="4" vs-sm="6" vs-xs="12" >
-        <img src="../assets/logo.png" alt="" width="70%">
+        <!-- <img src="../assets/logo.png" alt="" width="70%"> -->
       <div class="left">
       </div>
     </vs-col>
@@ -127,8 +127,9 @@
               if(this.formValid()){
                 axios.post('http://localhost:8080/user.login', user)
                   .then((response) =>{
-                    if(response.data.exist == 1 ){
-                        this.$router.push('/admin')
+                    let res = response.data.exist
+                    if(res[0]== 1 ){
+                        this.$router.push(`/home/${res[1]}`)
                     }else{
                       this.alert('Iniciar sesion', 'Verifica usuario y/o contraseña')
                     }
@@ -169,10 +170,7 @@
                 text: pMessage,
                 textConfirm:'Aceptar',
                 textCancel:'',
-                color: 'primary',
-                confirm:()=>{
-                  this.clearFields()  
-                },
+                color: 'primary'
             })
           } 
         },

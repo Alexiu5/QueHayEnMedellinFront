@@ -63,5 +63,9 @@ label.label {
     text-align: left;
     font-weight: bold
 }
+
+.animated{
+    animation-duration: .2s;
+  }
 </style>
 

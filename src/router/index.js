@@ -24,8 +24,13 @@ export default new Router({
       component: UserRegister
     },
     {
-      path: '/admin/',
+      path: '/admin/:userId',
       name: 'admin',
+      component: Admin
+    },
+    {
+      path: '/home/:userId',
+      name: 'home',
       component: Admin
     },
   ]

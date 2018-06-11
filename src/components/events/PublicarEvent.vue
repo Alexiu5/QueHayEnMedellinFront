@@ -1,130 +1,136 @@
 <template>
 
   <vs-row>
-    <vs-col vs-offset="2" vs-type="flex" vs-justify="center" vs-align="center" vs-w="8">
+    <vs-col vs-offset="2" vs-type="flex" vs-justify="left" vs-align="center" vs-w="8">
       <div class="con-box">
         <div class="box">
 
            <form-wizard @on-complete="onComplete">
-              <tab-content title="01 INFORMACION GENERAL"
-                           icon="ti-user"  :before-change="validateFirstStep">
-
-                <vs-row vs-align="flex-start">
-                  <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-xs="12">
-                    <div class="vs-w-12">
+              <tab-content title="01 INFORMACION GENERAL" icon="ti-user"  :before-change="validateFirstStep">
+                <div id="infoGeneral">
+                  <div class="grid-info-general" id="datosEvento">
                       <h3 class="titleEvento">Datos del Evento</h3>
                       <label for="namevent" class="labelinpu">Nombre del Evento</label>
+
                       <vs-input id="namevent" class="inpu_name"
                         :vs-valid.sync="validos.name"
                         vs-success-text="Field is valid"
                         vs-danger-text="Field must have at least 5 characters"
                         :vs-validation-function="(value) => value.length > 1"
-                        vs-type="custom" v-model="eventos.title"/>
+                        vs-type="custom" 
+                        v-model="eventos.title"/>
                     </div>
-                  </vs-col>
-                </vs-row>
-                <vs-row vs-align="flex-start">
-                  <vs-col vs-type="flex" vs-justify="left" vs-align="left" vs-lg="6" vs-sm="12" vs-xs="12" >
-                    <div class="con-select vs-w-12">
-                      <vs-select
-                        :vs-valid.sync="validos.county"
-                        :vs-validation-function="validar()"
-                        class="vs-w-12 left"
-                        label="Pais:"
-                        v-model="eventos.county"
-                        :options="countrys"/>
-                    </div>
-                  </vs-col>
-                  <vs-col vs-type="flex" vs-justify="left" vs-align="center" vs-lg="6" vs-sm="12" vs-xs="12" >
-                    <div class="con-select vs-w-12">
-                      <vs-select
-                        :vs-valid.sync="validos.depart"
-                        :vs-validation-function="validar()"
-                        class="vs-w-12 left"
-                        label="Departamento:"
-                        v-model="eventos.depart"
-                        :options="depaartament" :disabled="eventos.country == 0"/>
-                    </div>
-                  </vs-col>
-                </vs-row>
-                <vs-row vs-align="flex-start">
-                  <vs-col vs-type="flex" vs-justify="left" vs-align="left" vs-lg="6" vs-sm="12" vs-xs="12" >
-                    <div class="con-select vs-w-12">
-                      <vs-select
-                        :vs-valid.sync="validos.type"
-                        :vs-validation-function="validar()"
-                        class="vs-w-12 left"
-                        label="Typo Evento:"
-                        v-model="eventos.type"
-                        :options="typesEvent"/>
 
+                    <div class="grid-info-general" id="country">
+                      <div class="item">
+                        <label for="pais" class="labelinpu labelSelect">Pais:</label>
+                        <vs-select
+                          id="pais"
+                          :vs-valid.sync="validos.country"
+                          :vs-validation-function="validar()"
+                          class="vs-w-12 left"
+                          v-model="eventos.country"
+                          :options="countrys"/>
+                      </div>
                     </div>
-                  </vs-col>
-                  <vs-col vs-type="flex" vs-justify="left" vs-align="center" vs-lg="6" vs-sm="12" vs-xs="12" >
-                    <div class="con-select vs-w-12">
-                      <label class="labelinpu">Fecha del Evento</label>
-                      <el-date-picker
-                        :vs-valid.sync="validos.date"
-                        :vs-validation-function="validar()"
-                        v-model="eventos.date"
-                        type="date"
-                        placeholder="Pick a day">
-                      </el-date-picker>
+
+                       <!-- Item 2 and 3 -->
+                    <div class="grid-info-general" id="state">
+                      <div class="item">
+                        <label for="pais" class="labelinpu labelSelect">Departamento:</label>
+                        <vs-select
+                          :vs-valid.sync="validos.depart"
+                          :vs-validation-function="validar()"
+                          class="vs-w-12 left"
+                          label="Departamento:"
+                          v-model="eventos.depart"
+                          :options="depaartament" :disabled="eventos.country == 0"/>
+                      </div>
                     </div>
-                  </vs-col>
-                </vs-row>
 
+                    
+                    <div class="grid-info-general">
+                      <div class="item" id="city">
+                        <label for="Ciudad:" class="labelinpu labelSelect">Ciudad:</label>
+                        <vs-select
+                          id="ciudad"
+                          :vs-valid.sync="validos.city"
+                          :vs-validation-function="validar()"
+                          class="vs-w-12"
+                          v-model="eventos.city"
+                          :options="citys" :disabled="eventos.depart == 0" />  
+                        </div>
+                      </div>
 
+                    <div class="details-item" id="type" >
+                      <div class="item">
+                        <label for="pais" class="labelinpu labelSelect">Tipo de evento:</label>
+                        <vs-select
+                          :vs-valid.sync="validos.type"
+                          :vs-validation-function="validar()"
+                          class="vs-w-12 left"
+                          v-model="eventos.type"
+                          :options="typesEvent"/>
+
+                      </div>
+
+                      </div>
+
+                      <div class="details-item" id="date">
+                        <div class="item">
+                          <label class="labelinpu labelSelect">Fecha del Evento</label>
+                          <el-date-picker
+                            :vs-valid.sync="validos.date"
+                            :vs-validation-function="validar()"
+                            v-model="eventos.date"
+                            placeholder="Pick a day">
+                          </el-date-picker>
+                        </div>
+                      </div>
+
+                </div>
               </tab-content>
-              <tab-content title="02 UBICACION DEL EVENTO"
-                           icon="ti-settings">
+
+              
+              <tab-content title="02 UBICACION DEL EVENTO" icon="ti-settings">
                 <vs-card vs-color="success">
                   <vs-card-body class="addres">
-                    <div class="add_detail">
-                      <ul>
-                        <li>
-                          <vs-row vs-align="flex-start">
-                            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="12" >
-                              <vs-select
-                                :vs-valid.sync="validos.city"
-                                :vs-validation-function="validar()"
-                                class="vs-w-12"
-                                label="Ciudad:"
-                                v-model="eventos.city"
-                                :options="citys" :disabled="eventos.depart == 0" />
-                            </vs-col>
-                            <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="12" >
-                              <label for="place" class="labelinpu">Lugar:</label>
-                              <vs-input id="place"
-                                        :vs-valid.sync="validos.place"
-                                        :vs-validation-function="(value) => value.length > 2"
-                                        vs-success-text="Lugar Valido"
-                                        vs-danger-text="Falta el Luega"
-                                        vs-type="text" v-model="eventos.place"/>
-                            </vs-col>
-                          </vs-row>
-                        </li>
-                        <li>
-                          <vs-row vs-align="flex-start">
-                          <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" >
-                            <vs-input class="direccion"
-                                      :vs-valid.sync="validos.addres"
-                                      :vs-validation-function="(value) => value.length > 4"
-                                      vs-success-text="Correo Valido"
-                                      vs-danger-text=""
-                                      vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.address"/>
-                          </vs-col>
-                        </vs-row></li>
+                    <vs-col vs-w="6" vs-justify="right" vs-align="right">
+                        <div class="details-item" id="place">
+                          <vs-input 
+                            id="place"
+                            vs-label-placeholder="Lugar"
+                            :vs-valid.sync="validos.place"
+                            :vs-validation-function="(value) => value.length > 2"
+                            vs-success-text="Lugar Valido"
+                            vs-danger-text="Falta el Lugar"
+                            vs-type="text" v-model="eventos.place"/>
+                      </div>
 
-                      </ul>
-                    </div>
-                    <vs-card-media vs-media="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png"></vs-card-media>
+                      <div class="details-item" id="direccion">
+                        <vs-input 
+                          class="input-address"
+                          id="dirreccion"
+                          vs-label-placeholder="Direccion"
+                          :vs-valid.sync="validos.addres"
+                          :vs-validation-function="(value) => value.length > 4"
+                          vs-success-text="Direccion valida"
+                          vs-danger-text="Direccion incorrecta"
+                          vs-type="text" v
+                          s-label-placeholder="Direccion" v-model="eventos.address"/>
+                      </div>
+                    </vs-col>
+
+                      <vs-col vs-w="6" vs-justify="center" vs-align="right">
+                        <div class="details-item" id="map">
+                          <vs-card-media vs-media="https://www.google.com/maps/about/images/mymaps/mymaps-desktop-16x9.png"></vs-card-media>
+                        </div>
+                      </vs-col>
                   </vs-card-body>
                 </vs-card>
 
                 <h3 class="titleabout">Sobre el Evento</h3>
-                <vs-row vs-align="flex-start">
-                  <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" >
+                
                    <div class="con-input con-about">
                        <textarea class=" vs-input about"
                                  :vs-valid.sync="validos.about"
@@ -133,14 +139,12 @@
                                  vs-danger-text=""
                                  vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.description"/>
                    </div>
-                  </vs-col>
-                </vs-row>
+
               </tab-content>
-              <tab-content title="03 SECCION DE PAGO"
-                           icon="ti-check">
+              <tab-content title="03 SECCION DE PAGO" icon="ti-check">
 
                 <h3 class="titleEvento">Formas de Pago</h3>
-                <vs-card vs-color="danger">
+                <vs-card vs-color="primary">
                   <vs-card-header :vs-background-color="selectecost" vs-title="Free" vs-icon="error" :vs-fill="true"></vs-card-header>
                   <vs-card-body>
                     <vs-row vs-align="flex-start">
@@ -168,6 +172,7 @@
                       <vs-col vs-type="block" vs-justify="left" vs-align="left" vs-lg="2" vs-sm="12" >
 
                         <svg width="100%" viewBox="0 0 212 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Payment -->
                           <defs>
                             <path d="M2.5,0 L57.5,0 C58.875,0 60,1.059 60,2.353 L60,37.647 C60,38.941 58.875,40 57.5,40 L2.5,40 C1.125,40 0,38.941 0,37.647 L0,2.353 C0,1.059 1.125,0 2.5,0 Z" id="path-1"></path>
                             <path d="M9.188,0.5 C14.188,0.5 18.25,4.562 18.25,9.562 C18.25,14.562 14.188,18.625 9.188,18.625 C4.188,18.625 0.125,14.562 0.125,9.562 C0.125,4.562 4.188,0.5 9.188,0.5 Z" id="path-3"></path>
@@ -377,7 +382,7 @@
         depaartament: [],
         citys: [],
         typesEvent: [ {
-          text: 'Seleccione Opcion', value: 0
+          text: 'Seleccione', value: 0
         }],
         costs: 'Free',
         selectecost: 'danger',
@@ -391,14 +396,14 @@
           latitude: '',
           date:'',
           active: 1,
-          idUser: 1,
+          userId: this.$route.params.userId,
           idEventType: 1,
           publishedDate: Date.now(),
           publishedActive: true,
           creationDate: Date.now(),
           updateDate: Date.now(),
           tagIds: [],
-          county: '',
+          country: '',
           depart:'',
           type:'',
           city:'',
@@ -417,7 +422,7 @@
         },
         validos:{
           name: false,
-          county:false,
+          country:false,
           depart:false,
           type:false,
           date:false,
@@ -437,21 +442,19 @@
     },
     methods: {
       onComplete: () => {
-        var datasend = JSON.stringify(this.eventos)
-
-        console.log(datasend)
-        axios({
-          method: 'post',
-          url: 'http://localhost:8080/event.create',
-          data: datasend
-        })
-          .then(response => {
-
-           console.log(response)
-          })
-          .catch(e => {
-            console.log(e)
-          })
+        
+        console.log(this.eventos)
+        // axios({
+        //   method: 'post',
+        //   url: 'http://localhost:8080/event.create',
+        //   data: JSON.stringify(datasend)
+        // })
+        //   .then(response => {
+        //     console.log(response)
+        //   })
+        //   .catch(e => {
+        //     console.log(e)
+        //   })
       },
       validateFirstStep() {
         return new Promise((resolve, reject) => {
@@ -468,13 +471,32 @@
         })
       },
       validar() {
-        if (this.eventos.county != 0) this.validos.county = true
-        else  this.validos.county = false
+        if (this.eventos.country != 0) this.validos.country = true
+        else  this.validos.country = false
 
         if (this.eventos.depart != 0) this.validos.depart = true
         else  this.validos.depart = false
 
-      }
+      },
+      toast: function(title, message){
+            // let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
+            let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+            this.$vs.notify({
+              title:title,
+              text: pMessage,
+              color:'primary'})
+          },
+
+        alert : function(title, message){
+            let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+            this.$vs.alert({
+                title:title,
+                text: pMessage,
+                textConfirm:'Aceptar',
+                textCancel:'',
+                color: 'primary'
+            })
+          } 
     },
     created() {
       for (var i = 0; i < Countris.length; i++) {
@@ -525,8 +547,8 @@
       margin-top: 2em;
     }
     .el-date-editor.el-input {
-      width: 94%;
-      padding: 17px 0;
+      width: 100%;
+      padding: 0px 0px;
     }
     .titleEvento {
       color: #2b333c;
@@ -536,12 +558,10 @@
       padding-left: 15px;
       font-weight: 400;
     }
-    .vs-input {
-      padding: 12px;
-    }
   }
   .addres {
     display: inline-flex;
+    padding: 10px;
     .add_detail {
       width: 100%;
       padding-right: 20px;
@@ -550,11 +570,11 @@
         list-style: none;
       }
       .direccion {
-        margin-top: 20px;
+        margin-top: 1.5rem;
       }
     }
     .con-vs-card-media {
-      width: 70%;
+      width: 100%;
     }
 
   }
@@ -588,6 +608,7 @@
       border: 1px solid rgba(0, 0, 0, 0.15);
       border-radius: 5px;
       width: 100%;
+      min-height: 200px;
       outline: none;
       &:focus {
         -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .15);
@@ -609,4 +630,45 @@
     padding-left: 25px;
   }
 
+  #infoGeneral{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, .5r);
+    
+    .grid-info-general{
+      margin: 10px 5px;
+    }
+
+    #country{
+      select{
+        width: 100px;
+      }
+    }
+
+    #datosEvento{
+      grid-column-start: 1;
+      grid-column-end: span 3;
+    }
+
+    #type{
+      grid-column-start: 1;
+      grid-column-end: span 1;
+    }
+
+    #date{
+      grid-column-start: 2;
+      grid-column-end: span 1;
+      grid-row-start: 3;
+      grid-row-end: span 3; 
+    }
+  }
+
+  .item{
+    max-width: 100%;
+    padding: 10px
+  }
+
+  .labelSelect{
+    margin: 1.5rem -10px;
+  }
 </style>
