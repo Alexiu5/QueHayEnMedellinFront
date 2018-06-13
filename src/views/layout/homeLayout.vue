@@ -7,23 +7,46 @@
       vs-parent="#sidebar"
       :vs-active.sync="active">
 
-      <vs-sidebar-item @click="actives=1" :vs-active="actives==1" vs-icon="question_answer">
-         <router-link to="/register">Home</router-link>
-      </vs-sidebar-item>
-      <vs-sidebar-item @click="actives=2" :vs-active="actives==2" vs-icon="gavel">
-         History
-      </vs-sidebar-item>
-      <vs-sidebar-item @click="actives=3" :vs-active="actives==3" vs-icon="verified_user">
-         Setings
-      </vs-sidebar-item>
-      <vs-sidebar-item @click="actives=4" :vs-active="actives==4" vs-icon="account_box">
-         Perfile
-      </vs-sidebar-item>
-      <vs-sidebar-item @click="actives=5" :vs-active="actives==5" vs-icon="card_giftcard">
-         card
-      </vs-sidebar-item>
-    </vs-sidebar>
+      <vs-sidebar-item @click="actives= 1" :vs-active="actives==1" vs-icon="question_answer">
+            <router-link :to="{ name: 'RegistroUsuarios'}" append>Home</router-link>
+          </vs-sidebar-item>
 
+           <vs-sidebar-group vs-label="Eventos" vs-icon="event_note">
+            <vs-sidebar-item @click="actives=21" :vs-active="actives==21"  vs-icon="note_add">
+              <router-link :to="{name: 'Main'}"></router-link>
+            </vs-sidebar-item>
+
+            <vs-sidebar-item @click="actives=22" :vs-active="actives==22"  vs-icon="event_available">
+              Mis eventos
+            </vs-sidebar-item>
+          </vs-sidebar-group>
+
+          <vs-sidebar-item @click="actives=3" :vs-active="actives==3" vs-icon="verified_user">
+            Configuracion
+          </vs-sidebar-item>
+
+          <vs-sidebar-group vs-label="Administración" vs-icon="event_note">
+            <vs-sidebar-item @click="actives=11" :vs-active="actives==11"  vs-icon="note_add">
+              Solicitudes de Eventos
+            </vs-sidebar-item>
+
+            <vs-sidebar-item @click="actives=12" :vs-active="actives==12"  vs-icon="event_available">
+              Usuarios
+            </vs-sidebar-item>
+
+            <vs-sidebar-item @click="actives=13" :vs-active="actives==13"  vs-icon="event_available">
+              Publicados
+            </vs-sidebar-item>
+
+            <vs-sidebar-item @click="actives=14" :vs-active="actives==14"  vs-icon="event_available">
+              Historial
+            </vs-sidebar-item>
+          </vs-sidebar-group>
+
+           <vs-sidebar-item @click="actives=4" :vs-active="actives==4" vs-icon="account_box">
+              Salir
+          </vs-sidebar-item>
+    </vs-sidebar>
   </div>
     <div class="page-content">
         <pageContent>
@@ -76,6 +99,8 @@ export default {
             active:true, 
             actives: 2
         }
+    },
+    methods:{
     }
 }
 </script>

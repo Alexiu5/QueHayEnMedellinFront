@@ -28,16 +28,22 @@ export default new Router({
       component: UserRegister
     },
     {
-      path: '/admin',
+      path: '/admin/:userId',
       name: 'Admin',
       component: homeLayout,
-      redirect: 'admin/main/',
+      redirect: '/admin/:userId/main/',
       children: [
         {
           path: 'main/',
           name: 'Main',
           component: userConfig
-        }]
+        },
+        {
+          path: 'registrousuarios/',
+          name: 'RegistroUsuarios',
+          component: UserRegister
+        }
+      ]
     },
     {
       path: '/home/:userId',

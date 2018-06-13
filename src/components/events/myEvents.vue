@@ -1,7 +1,7 @@
 <template>
     <div class="config-container">
             <div class="user-content">
-            <h3>Lista de eventos en el sistema</h3>
+            <h3>Mis Eventos</h3>
             <div class="table-container">
                 <table class="table table-striped">
                     <thead>
@@ -12,10 +12,10 @@
                         <th>Hora</th>
                         <th>Fecha-Evento</th>
                         <th>Telefono</th>
-                        <th>Publicado</th>
+                        <th>Status</th>
                     </thead>
                     <tbody>
-                        <template v-for="item in events">
+                        <template v-for="(item, index) in events">
                            <tr>
                                <td>{{item.title}}</td>
                                <td>{{item.eventTypeId}}</td>
@@ -26,14 +26,9 @@
                                <td>phone number</td>
                                <td>{{item.publishedActive}}</td>
                                <td>
-                                   <div class="con-s">
-                                        <!-- <label for="">Primary</label> -->
-                                        <vs-switch 
-                                            v-tooltip="'Publicar'"
-                                            vs-type="primary"
-                                            v-model="item.publishedActive"
-                                            :ref="item.id" vs-icon="check"
-                                            @click="validateEvent(item.publishedActive,item.id)"/>
+                                   <div class="actions">
+                                       <vs-button class="edit" vs-type="primary-flat" vs-icon="edit"/>
+                                       <vs-button class="edit" vs-type="primary-flat" @click="deleteElement(index)" vs-icon="delete"/>
                                    </div>
                                </td>
                            </tr>
@@ -69,8 +64,8 @@
         }   
     }
 
-    .vs-button-icon span.text {
-        padding:0px;
+    .edit{
+        color:black;
     }
 
     .table {
@@ -196,26 +191,25 @@
 <script>
     import axios from 'axios';
     export default {
-        name:"User-solicitude",
+        name:"MyEvents",
         data(){ 
             return {
                 events:[]
             }
         },
         methods: {
-            addEvents: function(data){
+        deleteElement : function(index){
+            this.events.splice(index, 1)
+
+        },
+        addEvents: function(data){
                 data.map((e)=>{
-                    if(!e.publishedActive){
-                        this.events.push(e)
-                    }
+                    this.events.push(e)
                 })
-            },
-            validateEvent: function(state, idEvent){
-                console.log('i works?')
             }
         },
         created(){
-            axios.get(`http://localhost:8080/event.list`)
+            axios.get(`http://localhost:8080/event.list.${this.$route.params.userId}`)
             .then((res)=>{
                     this.addEvents(res.data.events)
             })

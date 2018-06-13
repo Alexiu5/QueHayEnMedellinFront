@@ -80,11 +80,14 @@
                         <div class="item">
                           <label class="labelinpu labelSelect">Fecha del Evento</label>
                           <el-date-picker
-                            format="YYYY/DD/MM"
+                            format="yyyy-MM-dd"
+                            type="date"
                             :vs-valid.sync="validos.date"
-                            :vs-validation-function="validar()"
                             v-model="eventos.date"
-                            placeholder="Pick a day">
+                            placeholder="Pick a day"
+                            @input="handleDateChange(eventos.date)"
+                            >
+                            
                           </el-date-picker>
                         </div>
                       </div>
@@ -215,7 +218,6 @@
 
                             <vs-input 
                                 id="totalAmmount"
-                                :vs-valid.sync = "validos.cost"
                                 vs-success-text="Monto total"
                                 vs-danger-text="Monto total"
                                 vs-type="custom" 
@@ -420,6 +422,7 @@
   import Countris from '@/data/CountriesList'
   import Depart from '@/data/DepartamentList'
   import City from '@/data/CityList'
+  import dateUtil from 'element-ui/lib/utils/date';
   import axios from 'axios';
 
   export default {
@@ -479,7 +482,7 @@
           userId: this.$route.params.userId,
           idEventType: 1,
           publishedDate: Date.now(),
-          publishedActive: true,
+          publishedActive: false,
           creationDate: Date.now(),
           updateDate: Date.now(),
           tagIds: [],
@@ -489,7 +492,7 @@
           city:'',
           place: '',
           address: '',
-          cost: '250.000 $'
+          cost: 250000
         },
 
         addre: {
@@ -509,8 +512,7 @@
           city:false,
           place: false,
           addres: false,
-          about: false,
-          cost: true
+          about: false
         },
         markers:{
             index : "Evento",
@@ -523,6 +525,11 @@
       }
     },
     methods: {
+      handleDateChange(date) {
+          if(date instanceof Date){
+            this.eventos.date = dateUtil.format(date, 'yyyy-MM-dd');
+          }
+      },
       validateAllFields(){
         let isValidos = this.creditCardValid.fullName && this.creditCardValid.creditCardNumber 
             && this.creditCardValid.idNumber && this.creditCardValid.idtype
@@ -566,31 +573,31 @@
             "description": this.eventos.description,
             "longitude": this.eventos.longitude,
             "latitude": this.eventos.latitude,
-            "date":`${this.eventos.date} / ${this.eventos.hour}`,
-            "address": this.eventos.address,
+            "date":`${this.eventos.date}`,
+            "hour": this.eventos.hour,
+            "address": " ",
             "active": this.eventos.active,
             "cost": this.eventos.cost,
-            "userId" : this.eventos.userId,
+            "idUser" : this.eventos.userId,
             "idEventType": this.eventos.idEventType,
             "publishedActive": this.eventos.publishedActive,
             "publishedDate": this.eventos.publishedDate
           }
 
           console.log(datasend)
-
-          // axios({
-          //   method: 'post',
-          //   url: 'http://localhost:8080/event.create',
-          //   data : datasend
-          // })
-          //   .then(response => {
-          //     if(response.status == 201 || response.data.status == 1){
-          //       this.alert("Correcto", "Evento correctamente registrado", "success")
-          //     } 
-          //   })
-          //   .catch(e => {
-          //     this.alert("Error", "Ha ocurrido un error en la consulta", "primary")
-          //   })
+          axios({
+            method: 'post',
+            url: 'http://localhost:8080/event.create',
+            data : datasend
+          })
+            .then(response => {
+              if(response.status == 201 || response.data.status == 1){
+                this.alert("Correcto", "Evento correctamente registrado", "success")
+              } 
+            })
+            .catch(e => {
+              this.alert("Error", "Ha ocurrido un error en la consulta", "primary")
+            })
         }else{
             this.toast("Error", "Verifica todos los campos")
         }

@@ -33,7 +33,16 @@
                                 <td>{{item.active}}</td>
                                 <td>{{item.idRole}}</td>
                                 <td>{{item.creationDate}}</td>
-                                <td><vs-button vs-icon="more_horiz" vs-color="success" vs-type="dark-flat" id="botonAccion"></vs-button></td>
+                                <td>
+                                <div class="con-s">
+                                        <vs-switch 
+                                            v-tooltip="'Activar / Desactivar'"
+                                            vs-type="primary"
+                                            v-model="item.active"
+                                            :ref="item.active" vs-icon="check"
+                                            @click="validateEvent(item.publishedActive,item.id)"/>
+                                   </div>
+                                </td>
                             </tr>
                         </template>
                     </tbody>

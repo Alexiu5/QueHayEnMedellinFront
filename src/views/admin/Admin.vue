@@ -9,7 +9,6 @@
           <div class="user-display">
             <vs-avatar vs-size="large"/>
             <h3 id="userName">{{user.login || "Defaut"}}</h3>
-            <!-- <hr id="separator"> -->
           </div>
 
           <vs-sidebar-item @click="changeState(1)" :vs-active="actives==1" vs-icon="question_answer">
@@ -63,6 +62,7 @@
 
       <Home v-if="actives == 1"></Home>
       <PublicarEvento v-else-if="actives == 21"></PublicarEvento>
+      <MyEvents v-else-if="actives == 22"></MyEvents>
       <Userconfig v-else-if="actives == 3"></userconfig>
 
       <EventSolicitudes v-else-if="actives == 11"></EventSolicitudes>
@@ -85,6 +85,7 @@
   import allUsers from '@/components/administration/All-users'
   import Published from '@/components/administration/Published'
   import EventSolicitudes from '@/components/administration/Event-solicitudes'
+  import MyEvents from '@/components/events/MyEvents'
 
     export default {
         name: "Admin",
@@ -95,7 +96,8 @@
           Userconfig,
           allUsers,
           Published,
-          EventSolicitudes
+          EventSolicitudes,
+          MyEvents
         },
         data:() =>({
           msg : 'user',
