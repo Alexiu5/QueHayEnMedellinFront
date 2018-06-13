@@ -169,7 +169,9 @@ export default {
                   && this.validos.phone
                   && this.validos.idRole
       },
+      validEmail(){
 
+      },
       createRoles : function(data){
           data.map((e)=>{
             if(e.active){
@@ -206,7 +208,9 @@ export default {
       }
       
     },
-
+    watch: {
+       
+    },
     created(){
       axios.get(`http://localhost:8080/role.list`)
         .then(response =>this.createRoles(response.data.roles)) 

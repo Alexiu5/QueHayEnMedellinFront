@@ -89,9 +89,6 @@
         width: 100vw;
         min-height: 100vh;  
         background-color: #2a333c;
-        // position: relative;
-        // float: right;
-
         h3{
             // color:black; 
             font-size: 1.5em;

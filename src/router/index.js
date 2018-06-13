@@ -5,13 +5,17 @@ import SinglePage from '@/components/SinglePage'
 import UserRegister from '@/components/UserRegister'
 import Admin from '@/views/admin/Admin'
 
+import homeLayout from '@/views/layout/homeLayout'
+import userConfig from '@/components/config/User-config'
+
+
 
 
 Vue.use(Router)
 Vue.use(vueResource)
 
 export default new Router({
-  mode: 'history',
+  mode:'history',
   routes: [
     {
       path: '/',
@@ -24,9 +28,16 @@ export default new Router({
       component: UserRegister
     },
     {
-      path: '/admin/:userId',
-      name: 'admin',
-      component: Admin
+      path: '/admin',
+      name: 'Admin',
+      component: homeLayout,
+      redirect: 'admin/main/',
+      children: [
+        {
+          path: 'main/',
+          name: 'Main',
+          component: userConfig
+        }]
     },
     {
       path: '/home/:userId',

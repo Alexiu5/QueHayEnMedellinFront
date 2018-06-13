@@ -11,7 +11,6 @@
       <div class="secitonlef-login">
         <vs-row vs-w="12">
           <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="12" vs-xs="12" >
-
             <div class="centerx" id="login-block">
               <vs-input 
                   :vs-valid.sync = "validos.username"

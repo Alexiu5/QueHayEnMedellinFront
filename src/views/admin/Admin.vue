@@ -7,8 +7,9 @@
       <div id="parentx">
        <vs-sidebar :vs-active.sync="active">
           <div class="user-display">
-            <vs-avatar vs-size="large" :vs-text="user.firstName || 'defualt'"/>
-            <h3>{{user.login || "Defaut"}}</h3>
+            <vs-avatar vs-size="large"/>
+            <h3 id="userName">{{user.login || "Defaut"}}</h3>
+            <!-- <hr id="separator"> -->
           </div>
 
           <vs-sidebar-item @click="changeState(1)" :vs-active="actives==1" vs-icon="question_answer">
@@ -75,6 +76,7 @@
   
 </template>
  <script>
+  import axios from 'axios'
   import Home from '@/components/Home'
   import Footer from '@/components/Footer'
   import PublicarEvento from '@/components/events/PublicarEvent'
@@ -115,31 +117,63 @@
           changeState: function(arg){
             this.actives = arg
             
+          },
+          searchUser: function(){
+            axios.get(`http://localhost:8080/user.${this.$route.params.userId}`)
+              .then((res)=>{
+                let data = res.data.user
+                this.user = {
+                  firstName : data.firstName,
+                  lastName : data.lastName,
+                  login: data.login
+                }
+              })
           }
         },
+        created(){
+          this.searchUser()
+        },
         watch: {
-          actives: function(){
-              // this.changeState(this.actives);
-          }
+        
         },
     }
  </script>
  
 <style lang="scss">
     body {
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
       background-color: #2a333c;
       color: #c05b5b;
     }
 
+    #userName{
+      text-transform: capitalize;
+      display: inline-block;
+      margin-top: 10%;
+      margin-left: 10px;
+    }
+
+    #separator{
+      border-radius: 50%;
+      width: 80%;
+      margin: 5px auto;
+      position: relative; 
+      border: 1px solid red; 
+    }
+
     .user-display{
         padding: .5rem;
-        border-bottom: 1px solid black;
         color: #000000;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        text-align: center;
-        margin: 1rem;
+        display: flex;
+        // border-bottom: 1px solid hsla(0,0%,71%,.3);
+        margin-bottom:10px;
+
+        .con-vs-avatar{
+          display: inline-block;
+          text-align: center;
+          overflow: hidden;
+          box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+        }
     }
 
     .nav-home {

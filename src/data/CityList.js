@@ -1,6 +1,4 @@
 export default [
-  'Selecione Opcion',
-  'Leticia',
   'Medellín',
   'Arauca',
   'Barranquilla',

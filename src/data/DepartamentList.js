@@ -1,6 +1,4 @@
 export default [
-  'Seleccione Opcion',
-  'Amazonas',
   'Antioquia',
   'Arauca',
   'Atlántico',
