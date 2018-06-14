@@ -2,7 +2,7 @@
     <div class="con-tab-Home">
         <Banner/>
         <Actualy/>
-            <div class="separador-linea">
+            <div class="separador-linea" style="margin:10px 30%">
                 <img src="../assets/lineas.png" id="separador" alt="separador" width="30%">
             </div>
         <Eventos/>

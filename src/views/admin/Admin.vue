@@ -46,7 +46,7 @@
           
           
             <vs-sidebar-item @click="cancel" :vs-active="actives==4" vs-icon="account_box">
-              <router-link to='/signOut' tag="div">
+              <router-link to='/' tag="div">
                 Salir
               </router-link>
             </vs-sidebar-item>

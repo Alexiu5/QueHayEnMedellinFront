@@ -65,10 +65,7 @@
                     <div class="details-item" id="type" >
                       <div class="item">
                         <label for="pais" class="labelinpu labelSelect">Tipo de evento:</label>
-                        <vs-select
-                          class="vs-w-12 left"
-                          v-model="tipoEvento"
-                          :options="typesEvent"/>
+                        <vs-input value="Cultural"/>
 
                       </div>
 
@@ -133,6 +130,10 @@
                                  vs-danger-text=""
                                  vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.description"/>
                    </div>
+                    <div>
+                        <label class="labelinpu labelSelect">Agregar Foto</label>
+                          <vs-upload :vs-file.sync="eventos.img" />
+                        </div>
 
               </tab-content>              
                 <vs-button vs-color="#fb2900" vs-type="primary-filled" slot="prev">REGRESAR</vs-button>
@@ -159,7 +160,7 @@
     data() {
       return {
         idEvent:'',
-        tipoEvento:2,
+        tipoEvento: 1 ,
         name_event: '',
         countrys: [],
         depaartament: [],
@@ -220,7 +221,8 @@
           city:'',
           place: '',
           address: '',
-          cost: 250000
+          cost: 250000,
+          img:''
         },
         hora:"",
         addre: {
@@ -408,7 +410,8 @@
              this.eventos.userId= data.userId
              this.eventos.type = data.eventTypeId
              this.eventos.publishedActive= data.publishedActive
-             this.eventos.publishedDate= data.publishedDate
+             this.eventos.publishedDate= data.publishedDate,
+             this.eventos.img = data.img
              this.markers.position = {
                lat:data.latitude,
                lng:data.longitude

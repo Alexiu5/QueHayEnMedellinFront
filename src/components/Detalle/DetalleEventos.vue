@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="buttons" style="margin-top: 5%;">
-                        <vs-button @click='asistir' style="width:100px;">Asistir</vs-button>
+                        <!-- <vs-button @click='asistir' style="width:100px;">Asistir</vs-button> -->
                     </div>
                 </div>
                 <div class="map">
@@ -261,6 +261,7 @@ export default {
         }
     },
     methods: {
+        
         fillData(data){
                 this.eventos.id = data.id
                 this.eventos.title = data.title
@@ -285,12 +286,19 @@ export default {
         }, 
         asistir: function(){
             console.log("works")
-        }
+        },
+        findComments: function(){
+            axios.get(`http://localhost:8080/comment.list.${this.route.params.idEvent}`)
+            .catch((res)=>{
+                console.log(res)
+            })
+            .catch(err=>console.log(err))
+        },
         },
         created(){
             let index = this.$route.params.idEvent
             this.mainEvent.push(this.eventData[index])
-            console.log(this.mainEvent)
+            this.findComments()
             //  axios.get(`http://localhost:8080/event.${this.$route.params.idEvent}`)
             // .then(response => {
             //     console.log(response)

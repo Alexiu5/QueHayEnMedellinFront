@@ -126,9 +126,6 @@
                                 ></Gmap-Marker>
                             </GmapMap>
                         </div>
-                        <div>
-                          <vs-upload :vs-file.sync="eventos.img" />
-                        </div>
                       </vs-col>
                   </vs-card-body>
                 </vs-card>
@@ -142,6 +139,11 @@
                                  vs-danger-text=""
                                  vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.description"/>
                    </div>
+
+                   <div>
+                        <label class="labelinpu labelSelect">Agregar Foto</label>
+                          <vs-upload :vs-file.sync="eventos.img" />
+                        </div>
 
               </tab-content>
 

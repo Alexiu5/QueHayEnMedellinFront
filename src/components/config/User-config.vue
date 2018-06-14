@@ -148,6 +148,7 @@
         data(){ 
             return {
              user : {
+                id:"",
                 firstName:'',
                 lastName:'',
                 login : '',
@@ -174,12 +175,21 @@
                 return this.validos.firstName && this.validos.lastName && this.validos.login && this.validos.email && this.validos.password && this.validos.phone
             },
             update: function(){
-                console.log(this.validData())
+                axios.post(`http://localhost:8080/user.update`, this.user)
+                    .then((res)=>{
+                        if(res.status == 200){
+                            this.alert("Exitoso", "Usuario editado correctamente")
+                            this.$router.push(-1)
+                        }
+                    })
+                    .catch((err)=>console.log(err))
+                    
             },
             searchUser : function(){
                 axios.get(`http://localhost:8080/user.${this.$route.params.userId}`)
                 .then((result)=>{
                     let e = result.data.user
+                    this.user.id= e.id
                     this.user.firstName = e.firstName
                     this.user.lastName = e.lastName
                     this.user.login = e.login
