@@ -11,6 +11,7 @@
             <h3 id="userName">{{user.login || "Defaut"}}</h3>
           </div>
 
+          
           <vs-sidebar-item @click="changeState(1)" :vs-active="actives==1" vs-icon="question_answer">
             Inicio
           </vs-sidebar-item>
@@ -47,27 +48,15 @@
             </vs-sidebar-item>
           </vs-sidebar-group>
           
-
-          <vs-sidebar-item @click="changeState(4)" :vs-active="actives==4" vs-icon="account_box">
-            Salir
-          </vs-sidebar-item>
-          <!-- <vs-sidebar-item @click="changeState(5)" :vs-active="actives==5" vs-icon="card_giftcard">
-            card
-          </vs-sidebar-item> -->
-
+          
+            <vs-sidebar-item @click="cancel" :vs-active="actives==4" vs-icon="account_box">
+              Salir
+            </vs-sidebar-item>
         </vs-sidebar>
     </div>
 
     <section id="content-boilerplate" ref="boilerplate" >
-
-      <Home v-if="actives == 1"></Home>
-      <PublicarEvento v-else-if="actives == 21"></PublicarEvento>
-      <MyEvents v-else-if="actives == 22"></MyEvents>
-      <Userconfig v-else-if="actives == 3"></userconfig>
-
-      <EventSolicitudes v-else-if="actives == 11"></EventSolicitudes>
-      <allUsers v-else-if="actives == 12"></allUsers>
-      <Published v-else-if="actives == 13"></Published>
+      <Content></Content>
     </section>
 
   </div>
@@ -87,6 +76,8 @@
   import EventSolicitudes from '@/components/administration/Event-solicitudes'
   import MyEvents from '@/components/events/MyEvents'
 
+  import Content from '@/views/admin/Content.vue'
+
     export default {
         name: "Admin",
         components:  {
@@ -97,7 +88,8 @@
           allUsers,
           Published,
           EventSolicitudes,
-          MyEvents
+          MyEvents, 
+          Content
         },
         data:() =>({
           msg : 'user',
@@ -112,13 +104,42 @@
           pages: {
             home : true,
             config : false,
-          }
+          },
+          userId:''
         }),
         
         methods:{
+          redirect: function(arg){
+            switch(arg){
+              case 1:
+                this.$router.push(`/home/${this.userId}`)
+                break
+              case 21:
+                this.$router.push(`/home/${this.userId}/publicarevento`)
+                break
+              case 22:
+                this.$router.push(`/home/${this.userId}/myevents`)
+                break
+              case 3:
+                this.$router.push(`/home/${this.userId}/configuracion`)
+                break
+              case 11:
+                this.$router.push(`/home/${this.userId}/listusers`)
+                break
+              case 12:
+                this.$router.push(`/home/${this.userId}/eventsolicitudes`)
+                break
+              case 13:
+                this.$router.push(`/home/${this.userId}/published`)
+                break
+            }
+          },
+          cancel: function(){
+              this.$router.go('/')   
+          },
           changeState: function(arg){
             this.actives = arg
-            
+            this.redirect(arg)
           },
           searchUser: function(){
             axios.get(`http://localhost:8080/user.${this.$route.params.userId}`)
@@ -134,6 +155,7 @@
         },
         created(){
           this.searchUser()
+          this.userId = this.$route.params.userId
         },
         watch: {
         

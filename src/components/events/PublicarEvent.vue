@@ -583,8 +583,6 @@
             "publishedActive": this.eventos.publishedActive,
             "publishedDate": this.eventos.publishedDate
           }
-
-          console.log(datasend)
           axios({
             method: 'post',
             url: 'http://localhost:8080/event.create',
@@ -676,7 +674,6 @@
 
     }
   }
-
 </script>
 
 <style lang="scss">

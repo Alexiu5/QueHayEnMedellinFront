@@ -2,11 +2,19 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import vueResource from 'vue-resource'
 import SinglePage from '@/components/SinglePage'
-import UserRegister from '@/components/UserRegister'
-import Admin from '@/views/admin/Admin'
 
-import homeLayout from '@/views/layout/homeLayout'
-import userConfig from '@/components/config/User-config'
+import Admin from '@/views/admin/Admin'
+import home from '@/components/home'
+import PublicarEvent from '@/components/events/PublicarEvent'
+import MyEvents from '@/components/events/myEvents'
+import editEvent from '@/components/events/EditEvent'
+import Userconfig from '@/components/config/User-config'
+
+import Allusers from '@/components/administration/All-users'
+import EventSolicitudes from '@/components/administration/Event-solicitudes'
+import Published from '@/components/administration/Published'
+
+import EventDetail from '@/components/Detalle/DetalleEventos'
 
 
 
@@ -18,37 +26,51 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: SinglePage
+      path:'/',
+      component:SinglePage
     },
     {
-      path: '/register',
-      name: 'Register',
-      component: UserRegister
-    },
-    {
-      path: '/admin/:userId',
-      name: 'Admin',
-      component: homeLayout,
-      redirect: '/admin/:userId/main/',
-      children: [
-        {
-          path: 'main/',
-          name: 'Main',
-          component: userConfig
-        },
-        {
-          path: 'registrousuarios/',
-          name: 'RegistroUsuarios',
-          component: UserRegister
-        }
-      ]
+      path: '/detail',
+      component: EventDetail
     },
     {
       path: '/home/:userId',
-      name: 'home',
-      component: Admin
-    },
+      component:Admin,
+      redirect:'/home/:userId/main/',
+      children:[
+        {
+          path:'main/',
+          component:home
+        },
+        {
+          path:'publicarevento',
+          component:PublicarEvent
+        },
+        {
+          path:'myevents',
+          component:MyEvents
+        },
+        {
+          path:'configuracion',
+          component:Userconfig
+        },
+        {
+          path:'listusers',
+          component:Allusers
+        },
+        {
+          path:'eventsolicitudes',
+          component:EventSolicitudes
+        },
+        {
+          path:'published',
+          component:Published
+        },
+        {
+          path:'editEvento/:idEvent',
+          component:editEvent
+        } 
+      ]
+    }
   ]
 })

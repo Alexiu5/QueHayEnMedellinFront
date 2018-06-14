@@ -1,5 +1,6 @@
 <template>
-    <div class="config-container">
+<section>
+    <div class="config-container" v-if="edit==1">
             <div class="user-content">
             <h3>Mis Eventos</h3>
             <div class="table-container">
@@ -27,8 +28,8 @@
                                <td>{{item.publishedActive}}</td>
                                <td>
                                    <div class="actions">
-                                       <vs-button class="edit" vs-type="primary-flat" vs-icon="edit"/>
-                                       <vs-button class="edit" vs-type="primary-flat" @click="deleteElement(index)" vs-icon="delete"/>
+                                       <vs-button class="edit" vs-type="primary-flat" @click="editEvent(item.id)" vs-icon="edit"/>
+                                       <vs-button class="edit" vs-type="primary-flat" @click="deleteElement(item.id, index)" vs-icon="delete"/>
                                    </div>
                                </td>
                            </tr>
@@ -36,8 +37,10 @@
                     </tbody>
                 </table>
             </div>
+        </div>
     </div>
-    </div>
+    
+</section>
 </template>
 
 <style lang="scss" scoped>
@@ -190,15 +193,24 @@
 
 <script>
     import axios from 'axios';
+    import EditEvent from './EditEvent'
     export default {
         name:"MyEvents",
+        components:{
+            EditEvent
+        },
         data(){ 
             return {
-                events:[]
+                events:[],
+                edit: 1
             }
         },
         methods: {
-        deleteElement : function(index){
+        editEvent: function (id){
+            this.$router.push(`editEvento/${id}`)
+        },
+
+        deleteElement : function(id, index){
             this.events.splice(index, 1)
 
         },
@@ -216,6 +228,7 @@
             .catch(error => console.log(error))
         },
          mounted(){
+
             
         },
 
