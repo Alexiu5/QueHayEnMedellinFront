@@ -27,6 +27,7 @@
           <vs-button vs-type="danger-line-down" v-on:click="category = 8">Cultura</vs-button>
         </vs-col>
       </vs-row>
+      
       <vs-row>
         <vs-col :key="index" v-for="(even, index) in dataEventos"  vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
           <div class="example-2 cards">
@@ -50,8 +51,7 @@
                   <span class="author">Jane Doe</span>
                   <h1 class="title"><a href="#">{{ even.name }}</a></h1>
                   <p class="text">{{ even.place }}</p>
-                  <vs-button class="button" @click="toDetail(even.likes)">inscribirme</vs-button>
-                  
+                  <vs-button class="button" @click="toDetail(index)">inscribirme</vs-button>
                 </div>
               </div>
             </div>
@@ -75,6 +75,7 @@
         num: [1, 2, 3, 4, 4],
         dataEventos: [
           {
+            id:'0',
             name: 'Selecta at @ArmandoRecords',
             imagen: 'https://hayevento.com/imgs/b43e598d4c90cf4633259cc32ddcd1cd.jpg',
             place: 'Armando Records - Calle 85 # 14-46',
@@ -87,6 +88,7 @@
             category: 1
           },
           {
+            id:'1',
             name: 'JORGE DREXLER SALVA VIDAS DE HIELO BOGOTÁ',
             imagen: 'https://hayevento.com/imgs/91f9d6e47f07138a8ee44279e81abf08.jpg',
             place: 'Teatro Jorge Eliecer Gaitán - Carrera 7 Nº 22-47',
@@ -99,6 +101,7 @@
             category: 2
           },
           {
+            id:'2',
             name: 'Kinder Malo x Pimp Flaco',
             imagen: 'https://hayevento.com/imgs/c734b4a13260ce587fa9bb4e61941046.jpg',
             place: 'Lugar no especificado - Sitio Por Definir',
@@ -111,6 +114,7 @@
             category: 1
           },
           {
+            id:'3',
             name: 'Juantxo Skalari & La Rude Band en Colombia',
             imagen: 'https://hayevento.com/imgs/c5fee65ace5b9f12c54998414d986448.jpg',
             place: 'Boogaloop Club - carrera 13 N. 65 - 42',
@@ -123,6 +127,7 @@
             category: 3
           },
           {
+            id:'4',
             name: 'Tour Fantasmas XXII',
             imagen: 'https://hayevento.com/imgs/1fc2bb70244eb5ea069191de996bcd62.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -135,6 +140,7 @@
             category: 5
           },
           {
+            id:'5',
             name: 'Edición dulce pecado El Fabuloso',
             imagen: 'https://hayevento.com/imgs/dcf6ccc9aaf2b2c1adb44af77ac037e6.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -147,6 +153,7 @@
             category: 5
           },
           {
+            id:'6',
             name: 'ME ERICE BARRANQUILLA AMPARO GRISALES',
             imagen: 'https://hayevento.com/imgs/05dba2d33843765bc5b43d22b00e94e4.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -159,6 +166,7 @@
             category: 6
           },
           {
+            id:'7',
             name: 'CuleFiesta',
             imagen: 'https://hayevento.com/imgs/81bff250614d9b3a4282472b49796bfb.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -171,6 +179,7 @@
             category: 2
           },
           {
+            id:'8',
             name: 'Carmen (Ópera)',
             imagen: 'https://hayevento.com/imgs/2d81e643bc58d2d6d7231a923242f462.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -183,6 +192,7 @@
             category: 3
           },
           {
+            id:'9',
             name: 'Señor Loop en Bogotá (Armando Records)',
             imagen: 'https://hayevento.com/imgs/8d147191a27da1637c625520e0c1c150.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -195,6 +205,7 @@
             category: 4
           },
           {
+            id:'10',
             name: 'Concierto: ¡Complaceme! | Eduardo Moreno & Okocán',
             imagen: 'https://hayevento.com/imgs/d69004196714768125dc2b34c4fb2fa4.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -207,6 +218,7 @@
             category: 5
           },
           {
+            id:'11',
             name: 'Noches del Pub / Animal Party',
             imagen: 'https://hayevento.com/imgs/97b2f974ca5015d85f4bca108374d6b0.jpg',
             place: 'Plaza de Bolívar - Cra. 7 #11-10',
@@ -228,7 +240,6 @@
        console.log(data)
       }, 
       toDetail: function (id){
-        // console.log(id)
         this.$router.push(`/detail/${id}`)
       }
     }

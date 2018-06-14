@@ -220,7 +220,28 @@
             },
             cancel:function(){
                 this.$router.go('/')    
-            }
+            },
+            validateEvent(value, id){
+                axios.post(`http://localhost:8080/user.disable.${id}`)
+                .then((result)=>{
+                    if(result.status == 200 || result.status == 201){
+                        this.toast("Info"," Cambios Realizados")
+                    }
+                })
+                .catch((err)=>console.log(err))
+                
+            },
+            toast: function(title, message){
+                let hTitle = `<h3 style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${title}</h3>`
+                let pMessage = `<p style="font-family: 'Avenir', Helvetica, Arial, sans-serif;">${message}</p>`
+
+
+                this.$vs.notify({
+                title:hTitle,
+                text: pMessage,
+                color:'primary'})
+            },
+
         },
         created(){
             axios.get(`http://localhost:8080/user.list`)

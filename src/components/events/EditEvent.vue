@@ -406,7 +406,7 @@
              this.eventos.date= data.date
              this.eventos.hour= "21:00:00"
              this.eventos.active= data.active
-             this.eventos.type = 1;
+             this.eventos.type = 2;
              this.eventos.cost= data.cost
              this.eventos.userId= data.userId
              this.eventos.idEventType= data.eventTypeId

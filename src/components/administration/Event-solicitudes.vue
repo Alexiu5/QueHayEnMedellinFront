@@ -1,7 +1,7 @@
 <template>
     <div class="config-container">
             <div class="user-content">
-            <h3>Lista de eventos en el sistema</h3>
+            <h3>Solicitudes de eventos</h3>
             <div class="table-container">
                 <table class="table table-striped">
                     <thead>
@@ -15,7 +15,7 @@
                         <th>Publicado</th>
                     </thead>
                     <tbody>
-                        <template v-for="item in events">
+                        <template v-for="(item, index) in events">
                            <tr>
                                <td>{{item.title}}</td>
                                <td>{{item.eventTypeId}}</td>
@@ -33,7 +33,7 @@
                                             vs-type="primary"
                                             v-model="item.publishedActive"
                                             :ref="item.id" vs-icon="check"
-                                            @click="validateEvent(item.publishedActive,item.id)"/>
+                                            @click="validateEvent(index,item.id)"/>
                                    </div>
                                </td>
                            </tr>
@@ -210,8 +210,14 @@
                     }
                 })
             },
-            validateEvent: function(state, idEvent){
-                console.log('i works?')
+            validateEvent: function(index, idEvent){
+                axios.post(`http://localhost:8080/event.validate.${idEvent}`)
+                .then((res)=>{
+                    if(res.status == 200){
+                        this.events.splice(index, 1)
+                    }
+                })
+                .catch((error)=>console.log(error))
             }
         },
         created(){

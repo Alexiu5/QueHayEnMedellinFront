@@ -10,6 +10,7 @@ import MyEvents from '@/components/events/myEvents'
 import editEvent from '@/components/events/EditEvent'
 import Userconfig from '@/components/config/User-config'
 
+import Register from '@/components/UserRegister'
 import Allusers from '@/components/administration/All-users'
 import EventSolicitudes from '@/components/administration/Event-solicitudes'
 import Published from '@/components/administration/Published'
@@ -32,6 +33,10 @@ export default new Router({
     {
       path: '/detail/:idEvent',
       component: EventDetail
+    },
+    {
+      path: '/register',
+      component: Register
     },
     {
       path: '/home/:userId',

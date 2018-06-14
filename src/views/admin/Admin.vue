@@ -124,10 +124,10 @@
                 this.$router.push(`/home/${this.userId}/configuracion`)
                 break
               case 11:
-                this.$router.push(`/home/${this.userId}/listusers`)
+                this.$router.push(`/home/${this.userId}/eventsolicitudes`)
                 break
               case 12:
-                this.$router.push(`/home/${this.userId}/eventsolicitudes`)
+                this.$router.push(`/home/${this.userId}/listusers`)
                 break
               case 13:
                 this.$router.push(`/home/${this.userId}/published`)
