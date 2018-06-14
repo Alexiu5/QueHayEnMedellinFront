@@ -148,19 +148,21 @@
       },
       fill: function(events){
         events.map((e)=>{
-          this.dataEventos.push({
-            id:'11',
-            name: e.title,
-            imagen: `@/assets/events/${this.separatePath(e.img)}`,
-            place: 'Plaza de Bolívar - Cra. 7 #11-10',
-            ubicacion: 'Medellín',
-            date: this.splitDate(e.date),
-            fecha: e.date,
-            hora: e.hour,
-            likes: 17,
-            coments: 20,
-            category: 1
-          })
+          if(e.publishedActive){
+            this.dataEventos.push({
+              id:'11',
+              name: e.title,
+              imagen: `@/assets/events/${this.separatePath(e.img)}`,
+              place: 'Plaza de Bolívar - Cra. 7 #11-10',
+              ubicacion: 'Medellín',
+              date: this.splitDate(e.date),
+              fecha: e.date,
+              hora: e.hour,
+              likes: 17,
+              coments: 20,
+              category: 1
+            })
+          }
         })
       }
     },

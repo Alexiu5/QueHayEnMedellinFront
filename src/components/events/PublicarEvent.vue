@@ -598,6 +598,7 @@
             .then(response => {
               if(response.status == 201 || response.data.status == 1){
                 this.alert("Correcto", "Evento correctamente registrado", "success")
+                
               } 
             })
             .catch(e => {
@@ -648,7 +649,7 @@
             textCancel:'',
             color: type,
             confirm:()=>{
-                this.cancel()
+                this.$router.go(-1)
             },
             cancel:()=>{
               this.cancel()
