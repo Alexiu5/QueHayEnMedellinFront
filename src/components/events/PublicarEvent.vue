@@ -126,6 +126,9 @@
                                 ></Gmap-Marker>
                             </GmapMap>
                         </div>
+                        <div>
+                          <vs-upload :vs-file.sync="eventos.img" />
+                        </div>
                       </vs-col>
                   </vs-card-body>
                 </vs-card>
@@ -492,7 +495,8 @@
           city:'',
           place: '',
           address: '',
-          cost: 250000
+          cost: 250000,
+          img:""
         },
 
         addre: {
@@ -576,6 +580,7 @@
             "date":`${this.eventos.date}`,
             "hour": this.eventos.hour,
             "address": " ",
+            "img":this.eventos.img,
             "active": this.eventos.active,
             "cost": this.eventos.cost,
             "idUser" : this.eventos.userId,

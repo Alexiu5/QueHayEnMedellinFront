@@ -43,7 +43,6 @@
 
                     <div class="email">
                       <vs-input
-                        disabled="true"
                         :vs-valid.sync="validos.email"
                         vs-success-text="Correo Valido"
                         vs-danger-text="Verifique email"
@@ -75,7 +74,7 @@
                       class="vs-w-12 left" id="profile" label="Rol - Perfil" v-model="user.idRole" :options="profiles"/> -->
                     <div class="buttons">
                       <vs-button vs-type="dark-border" id="cancel" @click="cancel">Cancelar</vs-button>  
-                      <vs-button type="submit" vs-type="primary-filled" class="btn-logn" id="send">Editar</vs-button>  
+                      <vs-button type="submit" vs-type="primary-filled" class="btn-logn" id="send" @click="update">Editar</vs-button>  
                     </div>
                 </div>
 
@@ -164,14 +163,18 @@
                 email:false,
                 password:false,
                 phone:false,
-                idRole: false,
-                },
+            },
                 }
         },
         methods: {
-
             cancel:function(){
-                this.$router.go('/')    
+                this.$router.go(-1)    
+            },
+            validData: function(){
+                return this.validos.firstName && this.validos.lastName && this.validos.login && this.validos.email && this.validos.password && this.validos.phone
+            },
+            update: function(){
+                console.log(this.validData())
             },
             searchUser : function(){
                 axios.get(`http://localhost:8080/user.${this.$route.params.userId}`)
@@ -180,6 +183,7 @@
                     this.user.firstName = e.firstName
                     this.user.lastName = e.lastName
                     this.user.login = e.login
+                    this.user.password = e.password
                     this.user.email = e.email
                     this.user.phone = e.phone
                     this.user.idRole = e.idRole

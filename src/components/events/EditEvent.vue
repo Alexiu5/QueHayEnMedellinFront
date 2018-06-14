@@ -66,10 +66,8 @@
                       <div class="item">
                         <label for="pais" class="labelinpu labelSelect">Tipo de evento:</label>
                         <vs-select
-                          :vs-valid.sync="validos.type"
-                          :vs-validation-function="validar()"
                           class="vs-w-12 left"
-                          v-model="eventos.type"
+                          v-model="tipoEvento"
                           :options="typesEvent"/>
 
                       </div>
@@ -161,10 +159,8 @@
     data() {
       return {
         idEvent:'',
+        tipoEvento:2,
         name_event: '',
-        time1: '',
-        date_event: '',
-        popupActivo: false,
         countrys: [],
         depaartament: [],
         citys: [],
@@ -220,7 +216,7 @@
           tagIds: [],
           country: '',
           depart:'',
-          type:'',
+          type:1,
           city:'',
           place: '',
           address: '',
@@ -363,6 +359,8 @@
         data.forEach(val => {
           this.typesEvent.push({ text: val.name, value: val.id })
         })
+        console.log(this.typesEvent);
+        console.log(this.eventos)
       },
       validar() {
         if (this.eventos.country != 0) this.validos.country = true
@@ -404,15 +402,13 @@
              this.eventos.longitude= data.longitude
              this.eventos.latitude= data.latitude
              this.eventos.date= data.date
-             this.eventos.hour= "21:00:00"
+             this.eventos.hour= "23:00:00"
              this.eventos.active= data.active
-             this.eventos.type = 2;
              this.eventos.cost= data.cost
              this.eventos.userId= data.userId
-             this.eventos.idEventType= data.eventTypeId
+             this.eventos.type = data.eventTypeId
              this.eventos.publishedActive= data.publishedActive
              this.eventos.publishedDate= data.publishedDate
-
              this.markers.position = {
                lat:data.latitude,
                lng:data.longitude

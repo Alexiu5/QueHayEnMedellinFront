@@ -31,6 +31,11 @@ export default new Router({
       component:SinglePage
     },
     {
+      path:'signOut/',
+      component:SinglePage,
+      redirect: '/'
+    },
+    {
       path: '/detail/:idEvent',
       component: EventDetail
     },

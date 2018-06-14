@@ -42,15 +42,13 @@
             <vs-sidebar-item @click="changeState(13)" :vs-active="actives==13"  vs-icon="event_available">
               Publicados
             </vs-sidebar-item>
-
-            <vs-sidebar-item @click="changeState(14)" :vs-active="actives==14"  vs-icon="event_available">
-              Historial
-            </vs-sidebar-item>
           </vs-sidebar-group>
           
           
             <vs-sidebar-item @click="cancel" :vs-active="actives==4" vs-icon="account_box">
-              Salir
+              <router-link to='/signOut' tag="div">
+                Salir
+              </router-link>
             </vs-sidebar-item>
         </vs-sidebar>
     </div>
@@ -131,6 +129,9 @@
                 break
               case 13:
                 this.$router.push(`/home/${this.userId}/published`)
+                break
+              case 4:
+                this.$router.go(`http://localhost:8084/`)
                 break
             }
           },

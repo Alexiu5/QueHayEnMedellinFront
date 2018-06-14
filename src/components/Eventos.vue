@@ -65,6 +65,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
 
   export default {
     name: "eventos",
@@ -238,10 +239,43 @@
       selCategory: (num) => {
        var data = this.dataEventos.indexOf(num)
        console.log(data)
+      },
+      separatePath: function(path){
+        let validPath = path.replace( /C:\\fakepath\\/i, "" );
+        return validPath
+      },
+      splitDate: function(date){
+        let fecha = date.split('-');
+        return {day:fecha[2],month:fecha[1], year:fecha[0]}
       }, 
       toDetail: function (id){
         this.$router.push(`/detail/${id}`)
+      },
+      fill: function(events){
+        events.map((e)=>{
+          this.dataEventos.push({
+            id:'11',
+            name: e.title,
+            imagen: this.separatePath(e.img),
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Medellín',
+            date: this.splitDate(e.date),
+            fecha: e.date,
+            hora: e.hour,
+            likes: 17,
+            coments: 20,
+            category: 1
+          })
+        })
       }
+    },
+    created(){
+      axios.get(`http://localhost:8080/event.list`)
+      .then((res)=>{
+        this.fill(res.data.events)
+      })
+      .catch((err)=>console.log(err))
+      
     }
   }
 </script>
