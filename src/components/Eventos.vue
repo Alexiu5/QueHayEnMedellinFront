@@ -48,7 +48,84 @@
         evento: null,
         num: [1, 2, 3, 4, 4],
         dataEventos: [
-          
+          {
+                    id:'12',
+                    name: 'Selecta at @ArmandoRecords',
+                    imagen: 'https://hayevento.com/imgs/b43e598d4c90cf4633259cc32ddcd1cd.jpg',
+                    place: 'Armando Records - Calle 85 # 14-46',
+                    ubicacion: 'Bogota',
+                    date: { day:'04',month:'ABR', year:'2018'},
+                    fecha: '04 Abril al 05 Abril',
+                    hora: '7:00 PM - 3:00 AM',
+                    likes: 17,
+                    coments: 20,
+                    category: 1
+                },
+                {
+                    id:'13',
+                    name: 'JORGE DREXLER SALVA VIDAS DE HIELO BOGOTÁ',
+                    imagen: 'https://hayevento.com/imgs/91f9d6e47f07138a8ee44279e81abf08.jpg',
+                    place: 'Teatro Jorge Eliecer Gaitán - Carrera 7 Nº 22-47',
+                    ubicacion: 'Bogota',
+                    date: { day:'05',month:'ABR', year:'2018'},
+                    fecha: '04 Abril al 05 Abril',
+                    hora: '7:00 PM - 3:00 AM',
+                    likes: 18,
+                    coments: 20,
+                    category: 2
+                },
+                {
+                    id:'14',
+                    name: 'Kinder Malo x Pimp Flaco',
+                    imagen: 'https://hayevento.com/imgs/c734b4a13260ce587fa9bb4e61941046.jpg',
+                    place: 'Lugar no especificado - Sitio Por Definir',
+                    ubicacion: 'Bogota',
+                    date: { day:'06',month:'ABR', year:'2018'},
+                    fecha: '04 Abril al 05 Abril',
+                    hora: '7:00 PM - 3:00 AM',
+                    likes: 19,
+                    coments: 20,
+                    category: 1
+                },
+                {
+                    id:'15',
+                    name: 'Juantxo Skalari & La Rude Band en Colombia',
+                    imagen: 'https://hayevento.com/imgs/c5fee65ace5b9f12c54998414d986448.jpg',
+                    place: 'Boogaloop Club - carrera 13 N. 65 - 42',
+                    ubicacion: 'Bogota',
+                    date: { day:'06',month:'ABR', year:'2018'},
+                    fecha: '04 Abril al 05 Abril',
+                    hora: '7:00 PM - 3:00 AM',
+                    likes: 20,
+                    coments: 20,
+                    category: 3
+                },
+                {
+                    id:'16',
+                    name: 'Tour Fantasmas XXII',
+                    imagen: 'https://hayevento.com/imgs/1fc2bb70244eb5ea069191de996bcd62.jpg',
+                    place: 'Plaza de Bolívar - Cra. 7 #11-10',
+                    ubicacion: 'Bogota',
+                    date: { day:'06',month:'ABR', year:'2018'},
+                    fecha: '06 Abril al 06 Abril',
+                    hora: '7:30 PM - 8:30 PM',
+                    likes: 17,
+                    coments: 20,
+                    category: 5
+                },
+                {
+                    id:'17',
+                    name: 'Edición dulce pecado El Fabuloso',
+                    imagen: 'https://hayevento.com/imgs/dcf6ccc9aaf2b2c1adb44af77ac037e6.jpg',
+                    place: 'Plaza de Bolívar - Cra. 7 #11-10',
+                    ubicacion: 'Bogota',
+                    date: { day:'05',month:'ABR', year:'2018'},
+                    fecha: '05 Abril al 06 Abril',
+                    hora: '9:00 PM - 3:30 AM',
+                    likes: 17,
+                    coments: 20,
+                    category: 5
+                }
         ],
 
       }
