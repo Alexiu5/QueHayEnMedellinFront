@@ -28,7 +28,7 @@
         </vs-col>
       </vs-row>
       <vs-row>
-        <vs-col :key="index" v-for="even, index in dataEventos"  vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
+        <vs-col :key="index" v-for="(even, index) in dataEventos"  vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
           <div class="example-2 cards">
             <div class="wrapper" :style="{ backgroundImage:'url(' + even.imagen + ')' }">
               <div class="header">
@@ -50,7 +50,8 @@
                   <span class="author">Jane Doe</span>
                   <h1 class="title"><a href="#">{{ even.name }}</a></h1>
                   <p class="text">{{ even.place }}</p>
-                  <a href="#" class="button">Inscribirme</a>
+                  <vs-button class="button" @click="toDetail(even.likes)">inscribirme</vs-button>
+                  
                 </div>
               </div>
             </div>
@@ -81,7 +82,7 @@
             date: { day:'04',month:'ABR', year:'2018'},
             fecha: '04 Abril al 05 Abril',
             hora: '7:00 PM - 3:00 AM',
-            likes: 2,
+            likes: 17,
             coments: 20,
             category: 1
           },
@@ -93,7 +94,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '04 Abril al 05 Abril',
             hora: '7:00 PM - 3:00 AM',
-            likes: 2,
+            likes: 18,
             coments: 20,
             category: 2
           },
@@ -105,7 +106,7 @@
             date: { day:'06',month:'ABR', year:'2018'},
             fecha: '04 Abril al 05 Abril',
             hora: '7:00 PM - 3:00 AM',
-            likes: 20,
+            likes: 19,
             coments: 20,
             category: 1
           },
@@ -129,7 +130,7 @@
             date: { day:'06',month:'ABR', year:'2018'},
             fecha: '06 Abril al 06 Abril',
             hora: '7:30 PM - 8:30 PM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 5
           },
@@ -141,7 +142,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 5
           },
@@ -153,7 +154,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 6
           },
@@ -165,7 +166,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 2
           },
@@ -177,7 +178,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 3
           },
@@ -189,7 +190,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 4
           },
@@ -201,7 +202,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 5
           },
@@ -213,7 +214,7 @@
             date: { day:'05',month:'ABR', year:'2018'},
             fecha: '05 Abril al 06 Abril',
             hora: '9:00 PM - 3:30 AM',
-            likes: 20,
+            likes: 17,
             coments: 20,
             category: 1
           }
@@ -225,6 +226,10 @@
       selCategory: (num) => {
        var data = this.dataEventos.indexOf(num)
        console.log(data)
+      }, 
+      toDetail: function (id){
+        // console.log(id)
+        this.$router.push(`/detail/${id}`)
       }
     }
   }

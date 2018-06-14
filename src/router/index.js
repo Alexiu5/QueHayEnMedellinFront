@@ -30,7 +30,7 @@ export default new Router({
       component:SinglePage
     },
     {
-      path: '/detail',
+      path: '/detail/:idEvent',
       component: EventDetail
     },
     {

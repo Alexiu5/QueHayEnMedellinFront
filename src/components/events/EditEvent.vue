@@ -275,11 +275,11 @@
           lat: e.latLng.lat(),
           lng: e.latLng.lng()
         }
-        this.alertMap("Confirmar", "¿Desea confirmar el lugar del evento?")
       },
       saveCoordinates : function(){
           this.eventos.latitude = this.markers.position.lat
           this.eventos.longitude = this.markers.position.lng
+          
         
       },
       alertMap : function(title, message){
@@ -291,8 +291,8 @@
                 textCancel:'Cancelar',
                 color: 'primary',
                 confirm:()=>{
+                  console.log("everything good")
                   this.saveCoordinates()
-                  this.markers.edited = true;
                 }
             })
       },
@@ -406,7 +406,7 @@
              this.eventos.date= data.date
              this.eventos.hour= "21:00:00"
              this.eventos.active= data.active
-             this.eventos.type = typesEvent[data.eventTypeId];
+             this.eventos.type = 1;
              this.eventos.cost= data.cost
              this.eventos.userId= data.userId
              this.eventos.idEventType= data.eventTypeId
